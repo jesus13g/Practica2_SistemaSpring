@@ -36,3 +36,15 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### py venv ###
+src/main/java/es/ubu/lsi/FlaskAPI/venv/**
+
+### py .env ###
+src/main/java/es/ubu/lsi/FlaskAPI/.env
+
+### archivos py ###
+src/main/java/es/ubu/lsi/FlaskAPI/__pycache__/**
+src/main/java/es/ubu/lsi/FlaskAPI/routes/__pycache__/**
+src/main/java/es/ubu/lsi/FlaskAPI/models/__pycache__/**
+src/main/java/es/ubu/lsi/FlaskAPI/utils/__pycache__/**
