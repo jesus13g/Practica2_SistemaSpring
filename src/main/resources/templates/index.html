@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio</title>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<h2>Bienvenido, <span th:text="${username}">usuario</span></h2>
+<p th:if="${username == 'Invitado'}">No tienes una sesión activa.</p>
+
+<p>Estás en la página principal del sistema.</p>
+
+<a th:href="@{/logout}">
+    <button type="button">Cerrar sesión</button>
+</a>
+</body>
+</html>
