@@ -21,8 +21,8 @@
     </div>
 
     <!-- Mensaje de error si las credenciales fallan -->
-    <div th:if="${error}">
-        <p style="color:red;" th:text="${error}"></p>
+    <div th:if="${param.error}">
+        <p style="color:red;">Usuario o contraseña incorrectos.</p>
     </div>
 
     <!-- Mensaje si viene de logout (opcional) -->

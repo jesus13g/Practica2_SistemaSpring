@@ -12,7 +12,7 @@ public class UserService {
     @Autowired
     private RestTemplate restTemplate;
 
-    private final String FLASK_API_URL = "http://localhost:5000/api/register";
+    private final String FLASK_API_URL = "http://127.0.0.1:5000/api/register";
 
     public boolean register(User user) {
         try {
@@ -33,7 +33,7 @@ public class UserService {
 
     public boolean authenticate(String username, String password) {
         try {
-            String url = "http://localhost:5000/api/login";
+            String url = "http://127.0.0.1:5000/api/login";
 
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
