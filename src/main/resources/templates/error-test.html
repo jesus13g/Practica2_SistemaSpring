@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Aplicación SpringBoot - Simulación de Errores</title>
+  <meta charset="UTF-8"/>
+  <style>
+    .success { color: green; }
+    .error400 { color: orange; }
+    .error500 { color: red; }
+    .error503 { color: purple; }
+    .errorUnknown { color: gray; }
+  </style>
+</head>
+<body>
+
+<!-- 🔥 Cabecera común -->
+<header style="background-color: #f0f0f0; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+  <h1>Aplicación SpringBoot</h1>
+
+  <div>
+    <div th:if="${#request.remoteUser == null}">
+      <a th:href="@{/login}">
+        <button type="button">Login</button>
+      </a>
+      <a th:href="@{/register}">
+        <button type="button">Registrarse</button>
+      </a>
+    </div>
+
+    <div th:if="${#request.remoteUser != null}">
+      <a th:href="@{/}">
+        <button type="button">Home</button>
+      </a>
+      <a th:href="@{/logout}">
+        <button type="button">Cerrar Sesión</button>
+      </a>
+    </div>
+  </div>
+</header>
+
+<hr>
+
+<h2 style="text-align: center;">Resultado de la Simulación de Error</h2>
+
+<div style="text-align: center; margin-top: 20px;">
+  <p th:if="${status == 200}" th:text="${message}" class="success"></p>
+
+  <p th:if="${status == 400}" th:text="${message}" class="error400"></p>
+
+  <p th:if="${status == 500}" th:text="${message}" class="error500"></p>
+
+  <p th:if="${status == 503}" th:text="${message}" class="error503"></p>
+
+  <p th:if="${status != 200 and status != 400 and status != 500 and status != 503}"
+     th:text="${message}" class="errorUnknown"></p>
+</div>
+
+<!-- Botón para volver -->
+<div style="text-align: center; margin-top: 30px;">
+  <a th:href="@{/}">
+    <button type="button">Volver al Inicio</button>
+  </a>
+</div>
+
+</body>
+</html>

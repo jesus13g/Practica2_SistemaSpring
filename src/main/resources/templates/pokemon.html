@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buscador de Pokémon</title>
+    <meta charset="UTF-8"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .pokemon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-top: 20px;
+        }
+        .pokemon-image {
+            margin-top: 10px;
+        }
+        .stat-bar {
+            width: 255px;
+            background-color: #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            margin: 2px 0;
+        }
+        .stat-fill {
+            height: 20px;
+            background-color: #4CAF50;
+            text-align: right;
+            color: white;
+            padding-right: 5px;
+            font-size: 12px;
+            line-height: 20px;
+        }
+        .back-button {
+            margin-top: 30px;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<header style="background-color: #f0f0f0; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+    <h1>Aplicación SpringBoot</h1>
+    <div>
+        <div th:if="${#request.remoteUser == null}">
+            <a th:href="@{/login}">
+                <button type="button">Login</button>
+            </a>
+            <a th:href="@{/register}">
+                <button type="button">Registrarse</button>
+            </a>
+        </div>
+
+        <div th:if="${#request.remoteUser != null}">
+            <a th:href="@{/}">
+                <button type="button">Home</button>
+            </a>
+            <a th:href="@{/logout}">
+                <button type="button">Cerrar Sesión</button>
+            </a>
+        </div>
+    </div>
+</header>
+
+<hr>
+
+
+<div style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+    <form th:action="@{/pokemon}" method="post" style="display: flex; align-items: center;">
+        <input type="text" name="name" placeholder="Introduce el nombre del Pokémon" required/>
+        <button type="submit" style="margin-left: 10px;">Buscar</button>
+    </form>
+
+
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+</div>
+
+<!-- ⚡ Datos del Pokémon -->
+<div th:if="${pokemon}" class="pokemon-container">
+    <h3 th:text="'#' + ${pokemon.id} + ' - ' + ${pokemon.name}"></h3>
+
+    <div class="pokemon-image">
+        <img th:src="${pokemon.sprites}" alt="Sprite del Pokémon"/>
+    </div>
+
+    <p><strong>Altura:</strong> <span th:text="${pokemon.height}"></span></p>
+    <p><strong>Peso:</strong> <span th:text="${pokemon.weight}"></span></p>
+
+    <p><strong>Tipos:</strong>
+        <span th:each="type : ${pokemon.types}" th:text="${type}" style="margin-right: 5px;"></span>
+    </p>
+
+    <p><strong>Habilidades:</strong>
+        <span th:each="ab : ${pokemon.abilities}" th:text="${ab}" style="margin-right: 5px;"></span>
+    </p>
+
+    <p><strong>Experiencia Base:</strong> <span th:text="${pokemon.base_experience}"></span></p>
+    <p><strong>Orden en la Pokédex:</strong> <span th:text="${pokemon.order}"></span></p>
+
+    <h4>Estadísticas:</h4>
+
+    <div>
+        <p><strong>HP:</strong></p>
+        <div class="stat-bar">
+            <div class="stat-fill" th:style="'width:' + (${pokemon.stats.hp} * 100 / 255) + '%;'" th:text="${pokemon.stats.hp}"></div>
+        </div>
+
+        <p><strong>Ataque:</strong></p>
+        <div class="stat-bar">
+            <div class="stat-fill" th:style="'width:' + (${pokemon.stats.attack} * 100 / 255) + '%;'" th:text="${pokemon.stats.attack}"></div>
+        </div>
+
+        <p><strong>Defensa:</strong></p>
+        <div class="stat-bar">
+            <div class="stat-fill" th:style="'width:' + (${pokemon.stats.defense} * 100 / 255) + '%;'" th:text="${pokemon.stats.defense}"></div>
+        </div>
+
+        <p><strong>Velocidad:</strong></p>
+        <div class="stat-bar">
+            <div class="stat-fill" th:style="'width:' + (${pokemon.stats.speed} * 100 / 255) + '%;'" th:text="${pokemon.stats.speed}"></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="back-button" style="text-align: center;">
+    <a th:href="@{/}">
+        <button type="button">Volver al Inicio</button>
+    </a>
+</div>
+
+</body>
+</html>

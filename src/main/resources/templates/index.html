@@ -5,13 +5,61 @@
     <meta charset="UTF-8"/>
 </head>
 <body>
+
+<header style="background-color: #f0f0f0; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+    <h1>Aplicación SpringBoot</h1>
+
+    <div>
+        <div th:if="${#request.remoteUser == null}">
+            <a th:href="@{/login}">
+                <button type="button">Login</button>
+            </a>
+            <a th:href="@{/register}">
+                <button type="button">Registrarse</button>
+            </a>
+        </div>
+
+        <div th:if="${#request.remoteUser != null}">
+            <a th:href="@{/}">
+                <button type="button">Home</button>
+            </a>
+            <a th:href="@{/logout}">
+                <button type="button">Cerrar Sesión</button>
+            </a>
+        </div>
+    </div>
+</header>
+
+<hr>
+
 <h2>Bienvenido, <span th:text="${username}">usuario</span></h2>
-<p th:if="${username == 'Invitado'}">No tienes una sesión activa.</p>
 
-<p>Estás en la página principal del sistema.</p>
+<div style="display: flex; justify-content: space-between; margin-top: 20px;">
 
-<a th:href="@{/logout}">
-    <button type="button">Cerrar sesión</button>
-</a>
+    <!-- Izquierda -->
+    <div>
+        <a th:href="@{/pokemon}">
+            <button type="button" style="padding: 10px;">Ir al Buscador de Pokémon</button>
+        </a>
+    </div>
+
+    <!-- Derecha en columna -->
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a th:href="@{/error-test/file}">
+            <button type="button">Simular Error de Archivo</button>
+        </a>
+        <a th:href="@{/error-test/db}">
+            <button type="button">Simular Error de Base de Datos</button>
+        </a>
+        <a th:href="@{/error-test/api}">
+            <button type="button">Simular Error de API Externa</button>
+        </a>
+        <a th:href="@{/error-test/badrequest}">
+            <button type="button">Simular Bad Request</button>
+        </a>
+    </div>
+
+</div>
+
 </body>
 </html>

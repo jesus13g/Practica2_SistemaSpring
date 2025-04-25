@@ -1,29 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Registro</title>
+    <title>Aplicación SpringBoot - Registro</title>
+    <meta charset="UTF-8"/>
 </head>
 <body>
-<h2>Registro</h2>
 
-<form th:action="@{/register}" th:object="${user}" method="post">
-    <label>Usuario:</label>
-    <input type="text" th:field="*{username}" required/><br/>
+<!-- 🔥 Cabecera común -->
+<header style="background-color: #f0f0f0; padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+    <h1>Aplicación SpringBoot</h1>
 
-    <label>Contraseña:</label>
-    <input type="password" th:field="*{password}" required/><br/>
+    <div>
+        <div th:if="${#request.remoteUser == null}">
+            <a th:href="@{/login}">
+                <button type="button">Login</button>
+            </a>
+            <a th:href="@{/register}">
+                <button type="button">Registrarse</button>
+            </a>
+        </div>
 
-    <button type="submit">Registrarse</button>
+        <div th:if="${#request.remoteUser != null}">
+            <a th:href="@{/}">
+                <button type="button">Home</button>
+            </a>
+            <a th:href="@{/logout}">
+                <button type="button">Cerrar Sesión</button>
+            </a>
+        </div>
+    </div>
+</header>
+
+<hr>
+
+<h2 style="text-align: center;">Registro de Usuario</h2>
+
+<form th:action="@{/register}" th:object="${user}" method="post"
+      style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
+
+    <div>
+        <label>Usuario:</label>
+        <input type="text" th:field="*{username}" required/>
+    </div>
+
+    <div style="margin-top: 10px;">
+        <label>Contraseña:</label>
+        <input type="password" th:field="*{password}" required/>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <button type="submit">Registrarse</button>
+    </div>
 </form>
 
-<div th:if="${error}" style="color:red;">
-    <p th:text="${error}"></p>
+<!-- Mensajes de error o éxito -->
+<div style="text-align: center; margin-top: 20px;">
+    <div th:if="${error}" style="color:red;">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div th:if="${success}" style="color:green;">
+        <p>Usuario registrado. Inicia sesión.</p>
+    </div>
 </div>
 
-<div th:if="${success}" style="color:green;">
-    <p>Usuario registrado. Inicia sesión.</p>
-</div>
-
-<a th:href="@{/login}">Volver al login</a>
 </body>
 </html>
