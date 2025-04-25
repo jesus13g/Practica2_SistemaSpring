@@ -11,11 +11,9 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        System.out.println("####### Home Controller de locos #######");
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName(); // Spring guarda aquí el username
-        
+
         model.addAttribute("username", username);
 
         return "index";
