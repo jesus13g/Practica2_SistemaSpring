@@ -1,0 +1,27 @@
+# Ignorar carpetas y archivos innecesarios:
+
+# Carpetas de IDEs
+.idea/
+.vscode/
+
+# Archivos de Git
+.git/
+.gitignore
+
+# Maven output
+target/
+
+# Archivos temporales
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Entornos virtuales de Python
+src/main/java/es/ubu/lsi/FlaskAPI/venv/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini

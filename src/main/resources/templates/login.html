@@ -3,6 +3,21 @@
 <head>
     <title>Aplicación SpringBoot</title>
     <meta charset="UTF-8"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .success-message {
+            color: green;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
@@ -32,7 +47,6 @@
 
 <hr>
 
-
 <h2 style="text-align: center;">Inicio de sesión</h2>
 
 <form th:action="@{/login}" method="post" th:object="${user}" style="display: flex; flex-direction: column; align-items: center; margin-top: 20px;">
@@ -48,11 +62,13 @@
         <button type="submit">Entrar</button>
     </div>
 
-    <div th:if="${error}" style="color:red; margin-top: 10px;">
+    <!-- Mostrar error de credenciales incorrectas -->
+    <div th:if="${error}" class="error-message">
         <p th:text="${error}"></p>
     </div>
 
-    <div th:if="${param.logout}" style="color:green; margin-top: 10px;">
+    <!-- Mostrar mensaje de logout correcto -->
+    <div th:if="${param.logout}" class="success-message">
         <p>Has cerrado sesión correctamente.</p>
     </div>
 </form>
